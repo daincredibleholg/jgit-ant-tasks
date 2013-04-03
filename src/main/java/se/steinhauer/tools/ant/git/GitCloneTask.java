@@ -21,9 +21,8 @@ public class GitCloneTask extends GitRemoteTask {
 
         CloneCommand cloneCommand = Git.cloneRepository();
         try {
-            if (isCredentialsValid()) {
+            if (isUserPasswordCredentialsValid() || isKeyfileCredentialsValid()) {
                  cloneCommand.setCredentialsProvider(getDefaultCredentialsProvider());
-
             }
             cloneCommand.setURI(uri).setDirectory(new File(destination)).setBranch(branch);
             cloneCommand.call().getRepository().close();

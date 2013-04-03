@@ -16,7 +16,7 @@ public class SshKeyfileCredentialsProvider extends CredentialsProvider {
 
     private String username;
     private String keyfilePath;
-    private char[] passphrase = null;
+    private String passphrase = null;
 
     public SshKeyfileCredentialsProvider(String username, String keyfilePath) {
         this(username, keyfilePath, null);
@@ -25,9 +25,7 @@ public class SshKeyfileCredentialsProvider extends CredentialsProvider {
     public SshKeyfileCredentialsProvider(String username, String keyfilePath, String passphrase) {
         this.username = username;
         this.keyfilePath = keyfilePath;
-        if (passphrase != null) {
-            this.passphrase = passphrase.toCharArray();
-        }
+        this.passphrase = passphrase;
     }
 
     @Override
@@ -43,13 +41,8 @@ public class SshKeyfileCredentialsProvider extends CredentialsProvider {
             for (CredentialItem i : items) {
                 if (i instanceof CredentialItem.Username)
                     continue;
-
-                else if (i instanceof CredentialItem.Password)
+                else if (i instanceof CredentialItem.StringType)
                     continue;
-
-                else if (i instanceof CredentialItem.StringType) {
-                    continue;
-                }
                 else {
                     supported = false;
                     break;
@@ -68,17 +61,19 @@ public class SshKeyfileCredentialsProvider extends CredentialsProvider {
             if (i instanceof CredentialItem.Username) {
                 ((CredentialItem.Username) i).setValue(username);
                 continue;
+//            } else if (i instanceof CredentialItem.Password) {
+//                ((CredentialItem.Password) i).setValue(passphrase);
+//                continue;
+            } else if (i instanceof CredentialItem.StringType) {
+                CredentialItem.StringType currentItem = (CredentialItem.StringType) i;
+                if (currentItem.getPromptText().startsWith("Passphrase")) {
+                    ((CredentialItem.StringType) i).setValue(passphrase);
+                    continue;
+                }
             }
-            if (i instanceof CredentialItem.Password) {
-                ((CredentialItem.Password) i).setValue(passphrase);
-                continue;
-            }
-            if (i instanceof PathCredentialItem) {
-                ((PathCredentialItem) i).setValue(keyfilePath);
-                continue;
-            }
+
             throw new UnsupportedCredentialItem(uri, i.getClass().getName()
-                    + ":" + i.getPromptText());
+                        + ":" + i.getPromptText());
         }
         return true;
     }
