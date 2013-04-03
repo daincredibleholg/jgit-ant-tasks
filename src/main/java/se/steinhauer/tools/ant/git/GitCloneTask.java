@@ -17,11 +17,13 @@ public class GitCloneTask extends GitRemoteTask {
     @Override
     public void execute() throws BuildException {
         log("Cloning repository " + uri);
+        log("Keyfile in use? - " + (isKeyfileCredentialsValid() ? "yes" : "no"));
 
         CloneCommand cloneCommand = Git.cloneRepository();
         try {
             if (isCredentialsValid()) {
                  cloneCommand.setCredentialsProvider(getDefaultCredentialsProvider());
+
             }
             cloneCommand.setURI(uri).setDirectory(new File(destination)).setBranch(branch);
             cloneCommand.call().getRepository().close();
@@ -35,12 +37,12 @@ public class GitCloneTask extends GitRemoteTask {
         this.uri = uri;
     }
 
-    public void setDestination(String destination) {
-        this.destination = destination;
-    }
-
     public void setBranch(String branch) {
         this.branch = branch;
+    }
+
+    public void setDest(String destination) {
+        this.destination = destination;
     }
 
 }

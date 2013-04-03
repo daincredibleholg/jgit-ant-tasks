@@ -16,8 +16,19 @@ public class SshKeyfileCredentialsProvider extends CredentialsProvider {
 
     private String username;
     private String keyfilePath;
-    private char[] passphrase;
+    private char[] passphrase = null;
 
+    public SshKeyfileCredentialsProvider(String username, String keyfilePath) {
+        this(username, keyfilePath, null);
+    }
+
+    public SshKeyfileCredentialsProvider(String username, String keyfilePath, String passphrase) {
+        this.username = username;
+        this.keyfilePath = keyfilePath;
+        if (passphrase != null) {
+            this.passphrase = passphrase.toCharArray();
+        }
+    }
 
     @Override
     public boolean isInteractive() {
@@ -39,8 +50,10 @@ public class SshKeyfileCredentialsProvider extends CredentialsProvider {
                 else if (i instanceof CredentialItem.StringType) {
                     continue;
                 }
-                else
+                else {
                     supported = false;
+                    break;
+                }
             }
         } else {
             supported = false;
