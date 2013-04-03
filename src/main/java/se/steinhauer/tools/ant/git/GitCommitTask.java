@@ -1,4 +1,4 @@
-package com.sergeyboguckiy.git.ant;
+package se.steinhauer.tools.ant.git;
 
 import org.apache.tools.ant.BuildException;
 import org.apache.tools.ant.Project;
