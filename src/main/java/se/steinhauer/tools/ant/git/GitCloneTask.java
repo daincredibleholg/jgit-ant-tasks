@@ -8,6 +8,13 @@ import org.eclipse.jgit.lib.Constants;
 
 import java.io.File;
 
+/**
+ * Ant taks for {@code git clone}.
+ *
+ * This task provides the ant bridge for JGit's clone implementation.
+ *
+ * @author Sergey Bogutskiy
+ */
 public class GitCloneTask extends GitRemoteTask {
 
     private String uri;
