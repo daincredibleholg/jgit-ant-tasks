@@ -62,9 +62,9 @@
     </build>
 
     <scm>
-        <connection>scm:git:git://github.com/dainredibleholg/jgit-ant-tasks.git</connection>
+        <connection>scm:git:github.com/dainredibleholg/jgit-ant-tasks.git</connection>
         <developerConnection>scm:git:git@github.com:dainredibleholg/jgit-ant-tasks.git</developerConnection>
-        <url>scm:git:git@github.com:dainredibleholg/jgit-ant-tasks.git</url>
+        <url>https://github.com/dainredibleholg/jgit-ant-tasks.git</url>
     </scm>
 
     <distributionManagement>
