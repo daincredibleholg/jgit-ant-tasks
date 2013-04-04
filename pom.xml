@@ -57,16 +57,13 @@
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-release-plugin</artifactId>
                 <version>2.4</version>
-                <configuration>
-                    <username>dainredibleholg</username>
-                </configuration>
             </plugin>
         </plugins>
     </build>
 
     <scm>
-        <connection>scm:git:https://github.com/dainredibleholg/jgit-ant-tasks.git</connection>
-        <developerConnection>scm:git:https://github.com/dainredibleholg/jgit-ant-tasks.git</developerConnection>
+        <connection>scm:git:ssh://git@github.com/dainredibleholg/jgit-ant-tasks.git</connection>
+        <developerConnection>scm:git:ssh://git@github.com/dainredibleholg/jgit-ant-tasks.git</developerConnection>
         <url>https://github.com/dainredibleholg/jgit-ant-tasks.git</url>
     </scm>
 
