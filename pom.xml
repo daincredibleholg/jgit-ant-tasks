@@ -69,9 +69,13 @@
   </scm>
 
     <distributionManagement>
-        <repository>
+<!--        <repository>
             <id>emehlbox-liferay-releases</id>
             <url>https://e-mehlbox.eu/nexus/content/repositories/liferay-releases</url>
+        </repository> -->
+        <repository>
+            <id>pd-am</id>
+            <url>https://support.prodyna.com/nexus/content/repositories/prodyna</url>
         </repository>
         <snapshotRepository>
             <id>emehlbox-liferay-snapshots</id>
