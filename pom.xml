@@ -63,9 +63,7 @@
 
     <scm>
         <connection>scm:git:https://github.com/dainredibleholg/jgit-ant-tasks.git</connection>
-<!--
-        <developerConnection>scm:git:https://git@github.com:dainredibleholg/jgit-ant-tasks.git</developerConnection>
--->
+        <developerConnection>scm:git:https://github.com/dainredibleholg/jgit-ant-tasks.git</developerConnection>
         <url>https://github.com/dainredibleholg/jgit-ant-tasks.git</url>
     </scm>
 
