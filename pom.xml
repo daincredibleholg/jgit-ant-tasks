@@ -62,14 +62,11 @@
     </build>
 
     <scm>
-        <connection>
-            scm:git:git://github.com/dainredibleholg/jgit-ant-tasks.git
-        </connection>
-        <developerConnection>
-            scm:git:ssh://git@github.com:dainredibleholg/jgit-ant-tasks.git
-        </developerConnection>
-      <tag>git-ant-advanced-0.1</tag>
-  </scm>
+        <connection>scm:git:git://github.com/dainredibleholg/jgit-ant-tasks.git</connection>
+        <developerConnection>scm:git:git@github.com:dainredibleholg/jgit-ant-tasks.git</developerConnection>
+        <tag>git-ant-advanced-0.1</tag>
+        <url>scm:git:git@github.com:dainredibleholg/jgit-ant-tasks.git</url>
+    </scm>
 
     <distributionManagement>
         <repository>
