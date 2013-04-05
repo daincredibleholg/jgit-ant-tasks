@@ -29,8 +29,6 @@
 
 package se.steinhauer.tools.ant.git;
 
-import com.jcraft.jsch.JSch;
-import com.jcraft.jsch.JSchException;
 import org.apache.tools.ant.Task;
 import org.eclipse.jgit.transport.CredentialsProvider;
 import org.eclipse.jgit.transport.OperationResult;
@@ -97,8 +95,7 @@ public abstract class GitRemoteTask extends Task {
      * @return True, if username and keyfilePath are neither null nor empty.
      */
     protected boolean isKeyfileCredentialsValid() {
-        boolean valid = !StringUtils.isEmptyOrNull(username) && !StringUtils.isEmptyOrNull(keyfilePath);
-        return valid;
+        return !StringUtils.isEmptyOrNull(username) && !StringUtils.isEmptyOrNull(keyfilePath);
     }
 
     /**
@@ -139,10 +136,8 @@ public abstract class GitRemoteTask extends Task {
         } else if (isKeyfileCredentialsValid()) {
             // create new credentials provider
             cp = new SshKeyfileCredentialsProvider(username, passphrase);
-            log("Using keyfile.");
-
-            // set everything needed on JSch
             initKeyfileJschConfig();
+            log("Using keyfile.");
         }
 
         return cp;
@@ -154,16 +149,7 @@ public abstract class GitRemoteTask extends Task {
      * The latter one will be initiated in this method and the keyfile will be configured.
      */
     protected void initKeyfileJschConfig() {
-        JschKeyfileConfigSessionFactory jschConfigSessionFactory = new JschKeyfileConfigSessionFactory();
-
-        JSch jsch = new JSch();
-        try {
-            jsch.addIdentity(keyfilePath);
-            // TODO check this...
-            jsch.setKnownHosts(".ssh/known_hosts");
-        } catch (JSchException e) {
-            e.printStackTrace();
-        }
+        JschKeyfileConfigSessionFactory jschConfigSessionFactory = new JschKeyfileConfigSessionFactory(keyfilePath);
 
         SshSessionFactory.setInstance(jschConfigSessionFactory);
     }

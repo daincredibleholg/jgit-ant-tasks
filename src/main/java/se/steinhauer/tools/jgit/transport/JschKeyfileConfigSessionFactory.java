@@ -29,9 +29,12 @@
 
 package se.steinhauer.tools.jgit.transport;
 
+import com.jcraft.jsch.JSch;
+import com.jcraft.jsch.JSchException;
 import com.jcraft.jsch.Session;
 import org.eclipse.jgit.transport.JschConfigSessionFactory;
 import org.eclipse.jgit.transport.OpenSshConfig;
+import org.eclipse.jgit.util.FS;
 
 /**
  * JSch based SSH session for keyfile based authentication.
@@ -40,6 +43,9 @@ import org.eclipse.jgit.transport.OpenSshConfig;
  * @since 2013-04-03
  */
 public class JschKeyfileConfigSessionFactory extends JschConfigSessionFactory {
+
+    private JSch _jsch = null;
+    private String keyfilePath = null;
 
     /**
      * Signals whether to use strict host key checking or not.
@@ -54,8 +60,10 @@ public class JschKeyfileConfigSessionFactory extends JschConfigSessionFactory {
      * Simply calls the super constructor.
      * Strict host key checking will be enabled.
      */
-    public JschKeyfileConfigSessionFactory () {
+    public JschKeyfileConfigSessionFactory (String keyfilePath) {
         super();
+
+        this.keyfilePath = keyfilePath;
     }
 
     /**
@@ -80,6 +88,16 @@ public class JschKeyfileConfigSessionFactory extends JschConfigSessionFactory {
     @Override
     protected void configure(OpenSshConfig.Host hc, Session session) {
         session.setConfig("StrictHostKeyChecking", useStrictHostKeyChecking());
+    }
+
+    @Override
+    protected Session createSession(OpenSshConfig.Host hc, String user, String host, int port, FS fs) throws JSchException {
+        Session session = super.createSession(hc, user, host, port, fs);
+
+        _jsch = getJSch(hc, fs);
+        _jsch.addIdentity(keyfilePath);
+
+        return session;
     }
 
     /**

@@ -24,7 +24,6 @@ public class GitCloneTask extends GitRemoteTask {
     @Override
     public void execute() throws BuildException {
         log("Cloning repository " + uri);
-        log("Keyfile in use? - " + (isKeyfileCredentialsValid() ? "yes" : "no"));
 
         CloneCommand cloneCommand = Git.cloneRepository();
         try {

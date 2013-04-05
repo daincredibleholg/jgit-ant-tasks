@@ -47,7 +47,7 @@ public class SshKeyfileCredentialsProvider extends CredentialsProvider {
     private String username;
     private String passphrase = null;
 
-    public SshKeyfileCredentialsProvider(String username, String keyfilePath) {
+    public SshKeyfileCredentialsProvider(String username, String passphrase) {
         this.username = username;
         this.passphrase = passphrase;
     }
