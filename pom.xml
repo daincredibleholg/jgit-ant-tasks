@@ -4,7 +4,7 @@
 
     <groupId>se.steinhauer.tools.ant.git</groupId>
     <artifactId>git-ant-advanced</artifactId>
-    <version>0.4-SNAPSHOT</version>
+    <version>0.4</version>
     <packaging>jar</packaging>
 
     <dependencies>
@@ -65,7 +65,7 @@
         <connection>scm:git:ssh://git@github.com/dainredibleholg/jgit-ant-tasks.git</connection>
         <developerConnection>scm:git:ssh://git@github.com/dainredibleholg/jgit-ant-tasks.git</developerConnection>
         <url>https://github.com/dainredibleholg/jgit-ant-tasks.git</url>
-      <tag>HEAD</tag>
+      <tag>git-ant-advanced-0.4</tag>
   </scm>
 
     <distributionManagement>
