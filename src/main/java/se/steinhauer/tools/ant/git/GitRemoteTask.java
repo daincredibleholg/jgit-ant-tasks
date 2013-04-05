@@ -160,7 +160,7 @@ public abstract class GitRemoteTask extends Task {
         try {
             jsch.addIdentity(keyfilePath);
             // TODO check this...
-//            jsch.setKnownHosts(".ssh/known_hosts");
+            jsch.setKnownHosts(".ssh/known_hosts");
         } catch (JSchException e) {
             e.printStackTrace();
         }
