@@ -35,6 +35,7 @@ import org.eclipse.jgit.transport.OperationResult;
 import org.eclipse.jgit.transport.SshSessionFactory;
 import org.eclipse.jgit.transport.UsernamePasswordCredentialsProvider;
 import org.eclipse.jgit.util.StringUtils;
+import se.steinhauer.tools.ant.JschLoggerForAnt;
 import se.steinhauer.tools.jgit.transport.JschKeyfileConfigSessionFactory;
 import se.steinhauer.tools.jgit.transport.SshKeyfileCredentialsProvider;
 
@@ -150,7 +151,7 @@ public abstract class GitRemoteTask extends Task {
      */
     protected void initKeyfileJschConfig() {
         JschKeyfileConfigSessionFactory jschConfigSessionFactory = new JschKeyfileConfigSessionFactory(keyfilePath);
-
+        jschConfigSessionFactory.setLogger(new JschLoggerForAnt(this));
         SshSessionFactory.setInstance(jschConfigSessionFactory);
     }
 
