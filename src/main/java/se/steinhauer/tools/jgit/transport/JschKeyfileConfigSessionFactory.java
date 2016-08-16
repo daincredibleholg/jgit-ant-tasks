@@ -31,6 +31,7 @@ package se.steinhauer.tools.jgit.transport;
 
 import com.jcraft.jsch.JSch;
 import com.jcraft.jsch.JSchException;
+import com.jcraft.jsch.Logger;
 import com.jcraft.jsch.Session;
 import org.eclipse.jgit.transport.JschConfigSessionFactory;
 import org.eclipse.jgit.transport.OpenSshConfig;
@@ -122,5 +123,9 @@ public class JschKeyfileConfigSessionFactory extends JschConfigSessionFactory {
 
     public void setStrictHostKeyChecking(boolean strictHostKeyChecking) {
         this.strictHostKeyChecking = strictHostKeyChecking;
+    }
+
+    public void setLogger(Logger logger) {
+        JSch.setLogger(logger);
     }
 }
